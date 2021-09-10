@@ -38,14 +38,22 @@ class ApplicationController < Sinatra::Base
 
   #update
   get '/articles/:id/edit' do 
+    # binding.pry
+    @article = Article.find(params[:id])
     erb :edit
   end
-  binding.pry
-
+  
   patch '/articles/:id' do
+    # binding.pryc
     @article = Article.find(params[:id])
     @article.update(params[:article])
     redirect to "/articles/#{ @article.id }"
+  end
+
+  post '/articles/:id/delete' do 
+    binding.pry
+    @article = Article.find(params[:id])
+    @article.destroy
   end
   
   
